@@ -59,11 +59,8 @@ namespace emakefun {
 
     /**
      * Initialize ESP-AT module.
-     * @param tx_pin TX pin.
-     * @param rx_pin RX pin.
-     * @param baud_rate Baud rate.
      */
-    //% block="Initialize ESP-AT module, TX Pin $tx_pin RX Pin $rx_pin baud rate $baud_rate"
+    //% block="Initialize ESP-AT module"
     //% subcategory="EspAt"
     //% tx_pin.defl=SerialPin.P1
     //% rx_pin.defl=SerialPin.P0
@@ -81,6 +78,7 @@ namespace emakefun {
         ];
         for (let command of at_commands) {
             if (!writeCommand(command, "\r\nOK\r\n", 500)) {
+                basic.showNumber(30)
                 throw "Error: module init failed.";
             }
         }
@@ -98,8 +96,9 @@ namespace emakefun {
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
         do {
-            if (writeCommand("AT+RST", "\r\nOK\r\n", 100) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+            if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
                 if (!writeCommand("AT", "\r\nOK\r\n", 100)) {
+                    basic.showNumber(20)
                     throw "Error: WiFi connection failed.";
                 }
                 return;
@@ -107,6 +106,7 @@ namespace emakefun {
                 cancelSend();
             }
         } while (input.runningTime() < end_time);
+        basic.showNumber(10)
         throw "Error: module restart failed.";
     }
 

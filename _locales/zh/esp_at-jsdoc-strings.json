@@ -1,8 +1,5 @@
 {
     "emakefun.initEspAtModule": "初始化ESP-AT模块",
-    "emakefun.initEspAtModule|param|tx_pin": "TX引脚",
-    "emakefun.initEspAtModule|param|rx_pin": "RX引脚",
-    "emakefun.initEspAtModule|param|baud_rate": "波特率",
     "emakefun.connectionScheme": "MQTT连接方案选项",
     "emakefun.restart": "重启ESP-AT模块",
     "emakefun.restart|param|timeout_ms": "等待响应的超时时间（毫秒）",
